@@ -68,6 +68,7 @@ new Vue({
     }
   },
   methods: {
+    //使用するメソッド
     doAdd: function(event, value) {
       var comment = this.$refs.comment
       if (!comment.value.length) {
@@ -86,7 +87,7 @@ new Vue({
 
     //change the state
     doChangeState: function(item) {
-      item.state = !item.state ? 0 : 1
+      item.state = !item.state ? 1 : 0
     },
     //delete
     doRemove: function(item) {
