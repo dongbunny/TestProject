@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Vue.js APP</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="./main.css">
   </head>
 
   <body>
@@ -12,10 +12,13 @@
       <h1> TODO LIST </h1>
       <!-- radio button -->
       <label v-for="label in options">
-        <input type="radio" v-model="current" v-bind:value="label.value">
+        <input type="radio" 
+        v-model="current" 
+        v-bind:value="label.value">
         {{ label.label }}
       </label>
-      　({{computedTodos.length}}件を表示中)
+      
+      　({{ computedTodos.length }} 件を表示中)
       <!-- Todo table-->
       <table>
         <thead v-pre>
@@ -27,9 +30,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in cumputedTodos" v-bind:key="item.id" v-bind:class="{done:item.state}">
-            <th>{{item.id}}</th>
-            <td>{{item.comment}}</td>
+          <tr 
+            v-for="item in computedTodos" 
+            v-bind:key="item.id" 
+            v-bind:class="{done:item.state}">
+            <th>{{ item.id }}</th>
+            <td>{{ item.comment }}</td>
             <td class="state">
               <!-- 状態変更ボタンのmock -->
               <button v-on:click="doChangeState(item)">
