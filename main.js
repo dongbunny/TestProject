@@ -35,6 +35,25 @@ new Vue({
 
     ]
   },
+  computed: {
+    computedTodos: function() {
+      //data current が-1ならすべて
+      //それ以外ならcurrent と stateが一致するものだけに絞り込む
+      return this.todos.filter(function(el) {
+        return this.current < 0 ? true : this.current === el.state
+      }, this)
+    },
+    labels() {
+      return this.options.reduce(function(a, b) {
+        return Object.assign(a, {
+          [b.value]: b.label
+        })
+      }, {})
+      	//keyから見つけやすいように、次のように加工したデータを作成
+        //{0:'作業中',1:'完了',-1:'全て'}
+    }
+  },
+  
   watch: {
     //object形式にする
     todos: {
@@ -49,24 +68,7 @@ new Vue({
     //このアプリの「instance作成時」に、localStorageに保存されているdataを自動取得、読み込む。
     this.todos = todoStorage.fetch()
   },
-  computed: {
-    computedTodos: function() {
-      //data current が-1ならすべて
-      //それ以外ならcurrent と stateが一致するものだけに絞り込む
-      return this.todos.filter(function(el) {
-        return this.current < 0 ? true : this.current === el.state
-      }, this)
-    },
-    labels() {
-      return this.options.reduce(function(a, b) {
-        return Object.assign(a, {
-          [b.value]: b.label
-        })
-        //keyから見つけやすいように、次のように加工したデータを作成
-        //{0:'作業中',1:'完了',-1:'全て'}
-      }, {})
-    }
-  },
+  
   methods: {
     //使用するメソッド
     doAdd: function(event, value) {
