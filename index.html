@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js APP</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+
+  <body>
+
+    <div id="app">
+      <h1> TODO LIST </h1>
+      <!-- radio button -->
+      <label v-for="label in options">
+        <input type="radio" v-model="current" v-bind:value="label.value">
+        {{label.label}}
+      </label>
+      　({{computedTodos.length}}件を表示中)
+      <!-- Todo table-->
+      <table>
+        <thead>
+          <tr>
+            <th class="id">ID</th>
+            <th class="comment">COMMENT</th>
+            <th class="state">STATE</th>
+            <th class="button">BUTTON</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in cumputedTodos" v-bind:key="item.id" v-bind:class="done:item.state">
+            <th>{{item.id}}</th>
+            <td>{{item.comment}}</td>
+            <td class="state">
+              <!-- 状態変更ボタンのmock -->
+              <button v-on:click="doChangeState(item)">
+                {{ labels[item.state] }}</button>
+            </td>
+            <td class="button">
+              <!-- 削除ボタンのmock -->
+              <button v-on:click.ctrl="doRemove(item)">DELETE</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- 新規登録form -->
+      <h2>新規作業の追加</h2>
+      <form class="add-form" v-on:submit.prevent="doAdd">
+        <!-- input comment -->
+        COMMENT <input type="text" ref="comment">
+        <!-- 追加ボタンのmock -->
+        <button type="submit">ADD
+        </button>
+      </form>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="main.js"></script>
+  </body>
+
+</html>
