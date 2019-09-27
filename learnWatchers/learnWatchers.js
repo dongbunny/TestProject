@@ -1,29 +1,27 @@
-//ˆö?AJAX ? ˜a’Ê—pH‹ï“I¶?›ß?‘Š“–?•xCVueŠjS‘ã?–v—Ld?
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 var watchExampleVM = new Vue({
-
-	el : '#watch-example',
+  el : '#watch-example',
   data : {
     question : '',
-		answer : 'I couldnot give u an answeer until you ask a question.'
+	answer : 'I couldnot give u an answeer until you ask a question.'
    },
-   //watch methode@F’l‚ª•Ï‰»‚·‚é‚½‚Ñ‚ÉŒÄ‚Î‚ê‚éAAPI‚É‰ßè•‰’S
-   //•‰’S‚ğ‚©‚©‚ç‚È‚¢‚æ‚¤‚ÉuLodashvdebounceŠÖ”‚ğ—˜—p ŒÀ§‘€ì?—¦
-   //_.debounce(ŠÖ”AwaitŠÔ)@¨‰½•b‚²‚Æ‚É“®‚«‚ª~‚Ü‚Á‚½‚çŠÖ”‚ğŒÄ‚Ô
+   //watch methodâ€˜ã€€ï¼šå€¤ãŒå¤‰åŒ–ã™ã‚‹ãŸã³ã«å‘¼ã°ã‚Œã‚‹ã€APIã«éå‰°è² æ‹…
+   //è² æ‹…ã‚’ã‹ã‹ã‚‰ãªã„ã‚ˆã†ã«ã€ŒLodashã€debounceé–¢æ•°ã‚’åˆ©ç”¨ é™åˆ¶æ“ä½œ?ç‡
+   //_.debounce(é–¢æ•°ã€waitæ™‚é–“)ã€€â†’ä½•ç§’ã”ã¨ã«å‹•ããŒæ­¢ã¾ã£ãŸã‚‰é–¢æ•°ã‚’å‘¼ã¶
    
    watch : {
-   	//”@‰Ê'question'?¶‰ü?C?˜¢”Ÿ”A‰ï?s
-    question : function(newQuestion,oldQuestion){
+   	//å¦‚æœ'question'?ç”Ÿæ”¹?ï¼Œ?ä¸ªå‡½æ•°å°±ä¼š?è¡Œ
+     question : function(newQuestion,oldQuestion){
     	this.answer = 'Waiting for u to stop typing...'
       
-      //ŠÄ‹ƒvƒƒpƒeƒB‚ğ—p‚¢‚½”ñ“¯Šúˆ—
-      
+      //ç›£è¦–ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’ç”¨ã„ãŸéåŒæœŸå‡¦ç† 
       this.debouncedGetAnswer()
     }
    },
    created : function(){
-   	//AJAX?‹w?—p??“üŠ®?Ë‰ï?¶B
+   	//AJAX?æ±‚æŒ‡?ç”¨??å…¥å®Œ?æ‰ä¼š?ç”Ÿã€‚
     this.debouncedGetAnswer = _.debounce(this.getAnswer , 500)
-   
    },
    methods : {
    	getAnswer :  function(){
@@ -34,9 +32,8 @@ var watchExampleVM = new Vue({
       this.answer = 'thinking'
       var vm = this
       
-      //axios¥—p˜°HTTP’ÊM“Ijavascript library
-      //_.capitalize¥lodash.js“I”Ÿ”
-      
+      //axiosæ˜¯ç”¨äºHTTPé€šä¿¡çš„javascript library
+      //_.capitalizeæ˜¯lodash.jsçš„å‡½æ•°
       axios.get('https://yesno.wtf/api').then(function(response){
        vm.answer = _.capitalize(response.data.answer)
       
